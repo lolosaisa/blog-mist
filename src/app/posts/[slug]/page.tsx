@@ -1,35 +1,45 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { CMS_NAME } from "@/lib/constants";
-import markdownToHtml from "@/lib/markdownToHtml";
-import Alert from "@/app/_components/alert";
 import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
+import Alert from "@/app/_components/alert";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
+import { fetchMarkdown } from "@/lib/github";
+import { parseMarkdown } from "@/lib/markdownToHtml";
 
-export default async function Post(props: Params) {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
 
-  if (!post) {
+//stopped fetching from local files, now fetching from github
+
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function PostPage({ params }: Params) {
+  const slug = params.slug;
+
+  let markdown: string;
+  try {
+    markdown = await fetchMarkdown(slug);
+  } catch (error) {
     return notFound();
   }
 
-  const content = await markdownToHtml(post.content || "");
+  const { frontmatter, content } = await parseMarkdown(markdown);
 
   return (
     <main>
-      <Alert preview={post.preview} />
+      <Alert preview={frontmatter?.preview} />
       <Container>
         <Header />
         <article className="mb-32">
           <PostHeader
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            author={post.author}
+            title={frontmatter.title}
+            coverImage={frontmatter.coverImage}
+            date={frontmatter.date}
+            author={frontmatter.author}
           />
           <PostBody content={content} />
         </article>
@@ -38,35 +48,44 @@ export default async function Post(props: Params) {
   );
 }
 
-type Params = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const slug = params.slug;
 
-export async function generateMetadata(props: Params): Promise<Metadata> {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
-
-  if (!post) {
+  let markdown: string;
+  try {
+    markdown = await fetchMarkdown(slug);
+  } catch (error) {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
+  const { frontmatter } = await parseMarkdown(markdown);
+
+  const title = `${frontmatter.title} | Next.js Blog Example`;
 
   return {
     title,
     openGraph: {
       title,
-      images: [post.ogImage.url],
+      images: frontmatter.ogImage ? [frontmatter.ogImage.url] : undefined,
     },
   };
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  // Optional: fetch all post slugs from GitHub
+  // This pre-builds pages for all posts
+  const repoOwner = "lolosaisa";
+  const repoName = "Miniminds_xyz";
+  const folder = "_posts";
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const res = await fetch(
+    `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folder}`
+  );
+  const files = await res.json();
+
+  return files
+    .filter((f: any) => f.name.endsWith(".md"))
+    .map((file: any) => ({
+      slug: file.name.replace(".md", ""),
+    }));
 }
