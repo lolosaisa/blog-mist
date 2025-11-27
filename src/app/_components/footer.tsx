@@ -1,32 +1,103 @@
-import Container from "@/app/_components/container";
-import { EXAMPLE_PATH } from "@/lib/constants";
+export const Footer = () => {
+  const productLinks = [
+    { name: "MIST Chamber", href: "#" },
+    { name: "FOCBB Protocol", href: "#" },
+    { name: "Private Transfers", href: "#" },
+    { name: "Compliance Tools", href: "#" },
+  ];
 
-export function Footer() {
+  const communityLinks = [
+    { name: "Discord", href: "#" },
+    { name: "Twitter", href: "#" },
+    { name: "GitHub", href: "#" },
+    { name: "Forum", href: "#" },
+  ];
+
+  const companyLinks = [
+    { name: "About", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Blog", href: "#" },
+    { name: "Contact", href: "#" },
+  ];
+
   return (
-    <footer className="bg-neutral-50 border-t border-neutral-200 dark:bg-slate-800">
-      <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
-          <h3 className="text-4xl lg:text-[2.5rem] font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-            Statically Generated with Next.js.
-          </h3>
-          <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
-            <a
-              href="https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates"
-              className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0"
-            >
-              Read Documentation
-            </a>
-            <a
-              href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
-              className="mx-3 font-bold hover:underline"
-            >
-              View on GitHub
-            </a>
+    <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-display font-bold text-primary-foreground">
+                M
+              </div>
+              <span className="font-display font-bold text-xl">Mist.cash</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Private, compliant token transfers for the future of Web3 finance.
+            </p>
+          </div>
+
+          {/* Product */}
+          <div>
+            <h4 className="font-display font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
+              {productLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Community */}
+          <div>
+            <h4 className="font-display font-semibold mb-4">Community</h4>
+            <ul className="space-y-2">
+              {communityLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-display font-semibold mb-4">Company</h4>
+            <ul className="space-y-2">
+              {companyLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </Container>
+
+        {/* Bottom */}
+        <div className="pt-8 border-t border-border">
+          <p className="text-center text-sm text-muted-foreground">
+            © 2025 FOCBB. Building the private Web3.
+          </p>
+        </div>
+      </div>
     </footer>
   );
-}
+};
 
-export default Footer;
+export default Footer;  
