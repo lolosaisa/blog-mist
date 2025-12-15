@@ -82,7 +82,7 @@ export const Sidebar = () => {
             Get the latest insights on private blockchain finance.
           </p>
         </div>
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <Input
             type="email"
             placeholder="Enter your email"
@@ -91,7 +91,7 @@ export const Sidebar = () => {
           <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
             Subscribe
           </Button>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

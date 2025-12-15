@@ -27,9 +27,9 @@ export const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-display font-bold text-primary-foreground">
+              {/* <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-display font-bold text-primary-foreground">
                 M
-              </div>
+              </div> */}
               <span className="font-display font-bold text-xl">Mist.cash</span>
             </div>
             <p className="text-sm text-muted-foreground">

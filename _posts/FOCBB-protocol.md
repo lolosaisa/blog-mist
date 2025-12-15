@@ -11,6 +11,7 @@ ogImage:
 tags:
   - Technology
   - Protocol
+slug: FOCBB
 ---
 
 The **FOCBB Protocol** is the cryptographic foundation behind Mist.cash. It enables private, compliant token transactions using a combination of zero-knowledge proofs and a unique selective-disclosure model.

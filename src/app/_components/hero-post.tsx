@@ -64,7 +64,7 @@ export const Hero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
-            Mist.cash <span className="text-primary">Blog</span>
+            MIST.cash <span className="text-primary">Blog</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

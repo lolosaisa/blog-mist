@@ -1,6 +1,7 @@
 import { Calendar, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
+
 interface ArticleCardProps {
   title: string;
   excerpt: string;
@@ -9,6 +10,7 @@ interface ArticleCardProps {
   tags: string[];
   image?: string;
   featured?: boolean;
+  slug?: string;
 }
 
 export const ArticleCard = ({
@@ -19,6 +21,7 @@ export const ArticleCard = ({
   tags,
   image,
   featured = false,
+  slug,
 }: ArticleCardProps) => {
   return (
     <article
