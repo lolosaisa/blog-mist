@@ -5,6 +5,9 @@ import { join } from "path";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
+
+djdj
+
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
