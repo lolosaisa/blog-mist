@@ -1,4 +1,4 @@
-<!-- ---
+---
 title: "Understanding FOCBB Protocol"
 excerpt: "A deep dive into the technical architecture that powers Mist.cash and enables secure, private transactions."
 coverImage: "/assets/blog/focbb/cover.jpg"
@@ -7,26 +7,14 @@ author:
   name: "Dev Team"
   picture: "/assets/blog/authors/dev-team.jpeg"
 ogImage:
-  url: "/assets/blog/focbb/cover.jpg"
+  url: "/assets/blog/mist-chamber/cover.jpg"
+
 tags:
   - Technology
   - Protocol
 slug: FOCBB
---- -->
 ---
-title: "The Future of Private DeFi"
-excerpt: "How privacy-preserving technologies are reshaping decentralized finance and creating new opportunities for compliant innovation."
-coverImage: "/assets/blog/mist-chamber/cover.jpg"
-date: "2025-01-12T09:00:00.000Z"
-author:
-  name: "Sarah Chen"
-  picture: "/assets/blog/authors/sarah.jpeg"
-ogImage:
-  url: "/assets/blog/mist-chamber/cover.jpg"
-tags:
-  - Privacy
-  - DeFi
----
+
 
 The **FOCBB Protocol** is the cryptographic foundation behind Mist.cash. It enables private, compliant token transactions using a combination of zero-knowledge proofs and a unique selective-disclosure model.
 

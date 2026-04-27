@@ -1,22 +1,22 @@
 export const Footer = () => {
   const productLinks = [
-    { name: "MIST Chamber", href: "#" },
-    { name: "FOCBB Protocol", href: "#" },
-    { name: "Private Transfers", href: "#" },
-    { name: "Compliance Tools", href: "#" },
+    { name: "MIST Chamber", href: "https://mist.cash/try-hidemi" },
+    { name: "GitHub", href: "https://github.com/mistcash" },
+
+   
   ];
 
   const communityLinks = [
-    { name: "Discord", href: "#" },
-    { name: "Twitter", href: "#" },
-    { name: "GitHub", href: "#" },
-    { name: "Forum", href: "#" },
+
+    { name: "Twitter", href: "https://x.com/_mistcash" },
+    { name: "Telegram", href: "https://t.me/+IopcODWeG7wxZDhl" },
   ];
 
   const companyLinks = [
-    { name: "About", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Blog", href: "#" },
+    { name: "MIST Chamber", href: "https://mist.cash/try-hidemi" },
+
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "#" },
   ];
 

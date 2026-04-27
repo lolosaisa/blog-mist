@@ -4,6 +4,7 @@ import { Button } from "@/app/_components/ui/button";
 import { Moon, Sun, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 
+
 type ThemeMode = "light" | "dark" | "system";
 const STORAGE_KEY = "nextjs-blog-starter-theme";
 
@@ -28,10 +29,8 @@ export const Navbar = () => {
   };
 
   const navItems = [
-    { name: "Product", path: "/product" },
-    { name: "Technology", path: "/technology" },
-    { name: "Community", path: "/community" },
-    { name: "Company", path: "/company" },
+  
+    { name: "About Us", path: "/about " },
     { name: "Blog", path: "/" },
   ];
 
@@ -39,8 +38,10 @@ export const Navbar = () => {
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/80 border-b border-border">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <span className="font-display font-bold text-xl">Mist.cash</span>
+         {/* Logo */}
+<Link href="/" className="font-display font-bold text-xl">
+  Mist.cash
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
