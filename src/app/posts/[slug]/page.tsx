@@ -10,13 +10,12 @@ import { getPostBySlug, getAllPosts } from "@/lib/api";
 import { markdownToHtml } from "@/lib/markdownToHtml";
 
 type Params = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function PostPage({ params }: Params) {
-  const { slug } = params;
+  const { slug } = await params;
 
-  // 1. Get the post — getPostBySlug returns null-ish if file missing
   let post;
   try {
     post = getPostBySlug(slug);
@@ -24,10 +23,8 @@ export default async function PostPage({ params }: Params) {
     return notFound();
   }
 
-  // 2. Convert raw markdown content to HTML
   const content = await markdownToHtml(post.content || "");
 
-  // 3. Get recommended posts from the same source
   const allPosts = getAllPosts();
   const recommendedPosts = allPosts
     .filter((p) => p.slug !== slug)
@@ -42,7 +39,6 @@ export default async function PostPage({ params }: Params) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 py-10">
 
-          {/* Main content */}
           <article className="lg:col-span-2 mx-auto max-w-3xl">
             <PostHeader
               title={post.title}
@@ -53,7 +49,6 @@ export default async function PostPage({ params }: Params) {
             <PostBody content={content} />
           </article>
 
-          {/* Sidebar — recommended posts */}
           <aside className="hidden lg:block">
             <h3 className="font-display text-xl font-bold mb-4">
               Recommended
@@ -77,11 +72,12 @@ export default async function PostPage({ params }: Params) {
   );
 }
 
-/* ── Metadata ── */
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+
   let post;
   try {
-    post = getPostBySlug(params.slug);
+    post = getPostBySlug(slug);
   } catch {
     return {};
   }
@@ -94,7 +90,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-/* ── Static Params ── */
 export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
