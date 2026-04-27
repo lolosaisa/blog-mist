@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
 import Alert from "@/app/_components/alert";
 import { PostBody } from "@/app/_components/post-body";
@@ -34,12 +33,11 @@ export default async function PostPage({ params }: Params) {
     <main className="bg-background text-foreground">
       <Alert preview={post.preview} />
 
-      <Container>
+      <div className="mx-auto max-w-6xl px-4">
         <Header />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 py-10">
-
-          <article className="lg:col-span-2 mx-auto max-w-3xl">
+        <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-3">
+          <article className="mx-auto max-w-3xl lg:col-span-2">
             <PostHeader
               title={post.title}
               coverImage={post.coverImage}
@@ -65,9 +63,8 @@ export default async function PostPage({ params }: Params) {
               />
             ))}
           </aside>
-
         </div>
-      </Container>
+      </div>
     </main>
   );
 }
