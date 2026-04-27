@@ -1,7 +1,7 @@
 import { type Author } from "./author";
 
 export type Post = {
-  tags: never[];
+  tags: string[];
   slug: string;
   title: string;
   date: string;
