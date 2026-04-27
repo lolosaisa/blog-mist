@@ -1,18 +1,17 @@
 ---
 title: "The Future of Private DeFi"
 excerpt: "How privacy-preserving technologies are reshaping decentralized finance and creating new opportunities for compliant innovation."
-coverImage: "/assets/blog/private-defi/cover.jpg"
+coverImage: "/assets/blog/mist-chamber/cover.jpg"
 date: "2025-01-12T09:00:00.000Z"
 author:
   name: "Sarah Chen"
   picture: "/assets/blog/authors/sarah.jpeg"
 ogImage:
-  url: "/assets/blog/private-defi/cover.jpg"
+  url: "/assets/blog/mist-chamber/cover.jpg"
 tags:
   - Privacy
   - DeFi
 ---
-
 The next evolution of DeFi is not just faster or cheaper—it is **private**.
 
 Today, every DeFi action is publicly visible:

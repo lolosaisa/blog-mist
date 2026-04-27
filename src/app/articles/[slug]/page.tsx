@@ -1,4 +1,5 @@
 import { getPostBySlug, getAllPosts } from "@/lib/api";
+import { markdownToHtml } from "@/lib/markdownToHtml";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/app/_components/navbar";
 import { Footer } from "@/app/_components/footer";
@@ -7,17 +8,15 @@ type Params = {
   slug: string;
 };
 
-export default function ArticlePage({ params }: { params: Params }) {
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "excerpt",
-    "content",
-    "date",
-    "author",
-    "coverImage",
-  ]);
+export default async function ArticlePage({ params }: { params: Params }) {
+  let post;
+  try {
+    post = getPostBySlug(params.slug);
+  } catch {
+    return notFound();
+  }
 
-  if (!post) notFound();
+  const content = await markdownToHtml(post.content || "");
 
   return (
     <>
@@ -32,18 +31,21 @@ export default function ArticlePage({ params }: { params: Params }) {
           {post.excerpt}
         </p>
 
-        <article className="prose prose-invert max-w-none">
-          {/* render markdown here */}
-          {post.content}
-        </article>
+        <article
+          className="prose prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </main>
 
-      <Footer />
+      
     </>
   );
 }
 
 
+export async function generateStaticParams() {
+  return getAllPosts().map((post) => ({ slug: post.slug }));
+}
 
 
 

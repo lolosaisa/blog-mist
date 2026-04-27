@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/app/_components/input";
 import { Button } from "@/app/_components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/app/_components/badge";
 
 export const Sidebar = () => {
   const categories = [

@@ -30,6 +30,7 @@ export default async function Home() {
             <ArticleCard
               title={heroPost.title}
               excerpt={heroPost.excerpt}
+              slug={heroPost.slug}
               author={heroPost.author?.name || "Mist Team"}
               date={heroPost.date}
               tags={heroPost.tags || []}
@@ -55,6 +56,7 @@ export default async function Home() {
                   key={post.slug}
                   title={post.title}
                   excerpt={post.excerpt}
+                  slug={post.slug }
                   author={post.author?.name || "Mist Team"}
                   date={post.date}
                   tags={post.tags || []}
@@ -83,6 +85,7 @@ export default async function Home() {
                   key={post.slug}
                   title={post.title}
                   excerpt={post.excerpt}
+                  slug={post.slug}
                   author={post.author?.name || "Mist Team"}
                   date={post.date}
                   tags={post.tags || []}
