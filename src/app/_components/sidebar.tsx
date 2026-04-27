@@ -1,80 +1,74 @@
-import { Search } from "lucide-react";
-import { Input } from "@/app/_components/input";
-import { Button } from "@/app/_components/ui/button";
 import { Badge } from "@/app/_components/badge";
+import { getAllPosts } from "@/lib/api";
+import Link from "next/link";
 
 export const Sidebar = () => {
-  const categories = [
-    { name: "Privacy Tech", count: 12 },
-    { name: "Compliance", count: 8 },
-    { name: "Web3 Finance", count: 15 },
-    { name: "FOCBB Protocol", count: 6 },
-    { name: "Security", count: 10 },
-  ];
+  const posts = getAllPosts();
 
-  const popularTags = [
-    "Zero-Knowledge",
-    "DeFi",
-    "Blockchain",
-    "Compliance",
-    "Privacy",
-    "Smart Contracts",
-  ];
+  // Derive categories and counts from real post tags
+  const tagCounts = posts
+    .flatMap((post) => post.tags || [])
+    .reduce<Record<string, number>>((acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    }, {});
+
+  const categories = Object.entries(tagCounts)
+    .sort((a, b) => b[1] - a[1])        // sort by count descending
+    .slice(0, 5);                         // top 5
+
+  const popularTags = Object.keys(tagCounts)
+    .sort((a, b) => tagCounts[b] - tagCounts[a])
+    .slice(0, 10);                        // top 10 tags
 
   return (
     <aside className="space-y-8">
-      {/* Search */}
-      <div className="space-y-3">
-        <h3 className="font-display font-bold text-lg">Search</h3>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search articles..."
-            className="pl-10 bg-secondary border-border focus:border-primary"
-          />
-        </div>
-      </div>
 
-      {/* Categories */}
+      {/* Categories — derived from post tags */}
       <div className="space-y-4">
         <h3 className="font-display font-bold text-lg">Categories</h3>
         <div className="space-y-2">
-          {categories.map((category) => (
-            <button
-              key={category.name}
+          {categories.map(([name, count]) => (
+            <Link
+              key={name}
+              href={`/?tag=${encodeURIComponent(name)}`}
               className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg bg-secondary hover:bg-secondary/70 text-left transition-colors group"
             >
               <span className="text-sm font-medium group-hover:text-primary transition-colors">
-                {category.name}
+                {name}
               </span>
               <Badge
                 variant="secondary"
                 className="bg-muted text-muted-foreground"
               >
-                {category.count}
+                {count}
               </Badge>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
 
-      {/* Popular Tags */}
+      {/* Popular Tags — derived from post tags */}
       <div className="space-y-4">
         <h3 className="font-display font-bold text-lg">Popular Tags</h3>
         <div className="flex flex-wrap gap-2">
           {popularTags.map((tag) => (
-            <Badge
+            <Link
               key={tag}
-              variant="outline"
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+              href={`/?tag=${encodeURIComponent(tag)}`}
             >
-              {tag}
-            </Badge>
+              <Badge
+                variant="outline"
+                className="cursor-pointer hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+              >
+                {tag}
+              </Badge>
+            </Link>
           ))}
         </div>
       </div>
 
-      {/* Newsletter */}
+      {/* Stay Updated — link instead of form */}
       <div className="rounded-xl bg-gradient-to-br from-card to-secondary p-6 space-y-4 border border-primary/20">
         <div className="space-y-2">
           <h3 className="font-display font-bold text-xl">Stay Updated</h3>
@@ -82,17 +76,16 @@ export const Sidebar = () => {
             Get the latest insights on private blockchain finance.
           </p>
         </div>
-        {/* <div className="space-y-2">
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            className="bg-background/50 border-border"
-          />
-          <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
-            Subscribe
-          </Button>
-        </div> */}
+        <Link
+          href="https://twitter.com/mistcash"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full text-center px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors text-sm"
+        >
+          Follow us on X
+        </Link>
       </div>
+
     </aside>
   );
 };
