@@ -40,7 +40,7 @@ export default function RootLayout({
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicon/favicon-16x16.png"
+          href="/favicon/favicon-96x96.png"
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link
